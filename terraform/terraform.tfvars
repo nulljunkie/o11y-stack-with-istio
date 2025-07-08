@@ -6,3 +6,6 @@ postgres_password = "quotepass123"
 postgres_init_sql_file = "../apps/db.sql"
 
 server_port = 50051
+
+server_image = "quote-server:latest"
+client_image = "quote-client:latest"

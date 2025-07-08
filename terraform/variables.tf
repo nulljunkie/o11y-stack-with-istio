@@ -28,3 +28,13 @@ variable "postgres_init_sql_file" {
   description = "Path to PostgreSQL initialization SQL file"
   type        = string
 }
+
+variable "server_image" {
+  description = "Container image for the quote server application"
+  type        = string
+}
+
+variable "client_image" {
+  description = "Container image for the quote client application"
+  type        = string
+}

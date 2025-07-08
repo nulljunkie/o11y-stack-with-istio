@@ -12,9 +12,9 @@ module "apps" {
   source = "./modules/apps"
 
   namespace         = var.namespace
-  server_image      = "quote-server:latest"
+  server_image      = var.server_image
   server_port       = var.server_port
-  client_image      = "quote-client:latest"
+  client_image      = var.client_image
   postgres_host     = module.infra.postgres_service_name
   postgres_port     = module.infra.postgres_service_port
   postgres_database = var.postgres_database

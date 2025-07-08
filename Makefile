@@ -1,16 +1,12 @@
-.PHONY: help setup-docker build-images tf-init tf-plan tf-apply tf-destroy get-outputs clean all deploy infra apps
+.PHONY: help build-images tf-init tf-plan tf-apply tf-destroy tf-state get-outputs clean all deploy infra apps
 
 help: ## Show this help message
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-setup-docker: ## Setup minikube Docker environment
-	@echo "Setting up minikube Docker environment..."
-	eval $$(minikube -p minikube docker-env)
-
-build-images: setup-docker ## Build Docker images
+build-images: ## Build Docker images
 	@echo "Building Docker images..."
-	docker compose build
+	./build.sh
 
 tf-init: ## Initialize Terraform
 	@echo "Initializing Terraform..."
@@ -27,6 +23,10 @@ tf-apply: tf-init ## Apply Terraform deployment
 tf-destroy: ## Destroy Terraform deployment
 	@echo "Destroying Terraform deployment..."
 	cd terraform && terraform destroy -auto-approve
+
+tf-state: ## Show Terraform state
+	@echo "Terraform state resources:"
+	@cd terraform && terraform state list
 
 get-outputs: ## Get deployment outputs
 	@echo "Getting deployment outputs..."
