@@ -1,0 +1,39 @@
+services:
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: quotesdb
+    volumes:
+      - ./apps/db.sql:/docker-entrypoint-initdb.d/db.sql:ro
+    ports:
+      - "5432:5432"
+
+  server:
+    build:
+      context: ./apps/server
+    container_name: server
+    ports:
+      - "50051:50051"
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=quotesdb
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+
+  client:
+    build:
+      context: ./apps/client
+    container_name: client
+    environment:
+      - SERVER_HOST=server
+      - SERVER_PORT=50051
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server

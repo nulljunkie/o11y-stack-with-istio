@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package quote;
+
+option go_package = "quote/proto;quote";
+// option go_package = "github.com/nulljunkie/observability-stack-with-istio";
+
+service Quote { rpc GetQuote(QuoteRequest) returns (QuoteResponse); }
+
+message QuoteRequest {}
+
+message QuoteResponse { string quote = 1; }
