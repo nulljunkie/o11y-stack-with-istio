@@ -15,6 +15,11 @@ resource "helm_release" "istiod" {
           enabled = true
         }
       }
+      pilot = {
+        env = {
+          PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION = true
+        }
+      }
       global = {
         meshID                      = "mesh1"
         multiCluster = {

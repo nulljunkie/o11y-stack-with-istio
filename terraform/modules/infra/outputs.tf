@@ -17,3 +17,14 @@ output "istio_gateway_nodeport_https" {
   description = "Istio Gateway NodePort for HTTPS"
   value       = module.istio.gateway_https_nodeport
 }
+
+output "grafana_nodeport" {
+  description = "Grafana NodePort for external access"
+  value       = module.monitoring.grafana_nodeport
+}
+
+output "grafana_admin_password" {
+  description = "Grafana admin password"
+  value       = module.monitoring.grafana_admin_password
+  sensitive   = true
+}

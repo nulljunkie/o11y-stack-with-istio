@@ -9,3 +9,6 @@ server_port = 50051
 
 server_image = "quote-server:latest"
 client_image = "quote-client:latest"
+
+grafana_admin_password = "admin123"
+grafana_nodeport = 30300

@@ -23,6 +23,14 @@ module "gateway" {
   depends_on = [module.istiod]
 }
 
+module "telemetry" {
+  source = "./telemetry"
+
+  istio_namespace = module.base.namespace
+
+  depends_on = [module.istiod]
+}
+
 # Enable sidecar injection for the app namespace
 resource "kubernetes_labels" "app_istio_injection" {
   api_version = "v1"

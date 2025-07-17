@@ -6,6 +6,8 @@ module "infra" {
   postgres_username        = var.postgres_username
   postgres_password        = var.postgres_password
   postgres_init_sql_file   = var.postgres_init_sql_file
+  grafana_admin_password   = var.grafana_admin_password
+  grafana_nodeport         = var.grafana_nodeport
 }
 
 module "apps" {
