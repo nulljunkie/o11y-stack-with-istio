@@ -50,6 +50,24 @@ resource "kubernetes_deployment" "client_v1" {
             name  = "VERSION"
             value = "v1"
           }
+
+          liveness_probe {
+            http_get {
+              path = "/health"
+              port = 8080
+            }
+            initial_delay_seconds = 30
+            period_seconds        = 10
+          }
+
+          readiness_probe {
+            http_get {
+              path = "/health"
+              port = 8080
+            }
+            initial_delay_seconds = 5
+            period_seconds        = 5
+          }
         }
       }
     }
@@ -107,6 +125,24 @@ resource "kubernetes_deployment" "client_v2" {
           env {
             name  = "VERSION"
             value = "v2"
+          }
+
+          liveness_probe {
+            http_get {
+              path = "/health"
+              port = 8080
+            }
+            initial_delay_seconds = 30
+            period_seconds        = 10
+          }
+
+          readiness_probe {
+            http_get {
+              path = "/health"
+              port = 8080
+            }
+            initial_delay_seconds = 5
+            period_seconds        = 5
           }
         }
       }

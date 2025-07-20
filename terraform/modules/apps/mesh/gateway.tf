@@ -1,9 +1,9 @@
-resource "kubernetes_manifest" "client_gateway" {
+resource "kubernetes_manifest" "quote_gateway" {
   manifest = {
     apiVersion = "networking.istio.io/v1beta1"
     kind       = "Gateway"
     metadata = {
-      name      = "client-gateway"
+      name      = "quote-gateway"
       namespace = var.namespace
     }
     spec = {

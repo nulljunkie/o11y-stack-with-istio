@@ -32,6 +32,13 @@ func main() {
 
 	client := pb.NewQuoteClient(conn)
 
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		response := fmt.Sprintf(`{"status": "healthy", "version": "%s"}`, version)
+		w.Write([]byte(response))
+	})
+
 	http.HandleFunc("/quote", func(w http.ResponseWriter, r *http.Request) {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 		defer cancel()
@@ -44,7 +51,7 @@ func main() {
 		}
 
 		w.Header().Set("X-Version", version)
-		
+
 		if version == "v2" {
 			response := fmt.Sprintf(`{"quote": "%s", "version": "%s", "enhanced": true}`, res.GetQuote(), version)
 			w.Header().Set("Content-Type", "application/json")
