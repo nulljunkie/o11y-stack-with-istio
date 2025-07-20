@@ -18,6 +18,10 @@ func main() {
 
 	serverHost := os.Getenv("SERVER_HOST")
 	serverPort := os.Getenv("SERVER_PORT")
+	version := os.Getenv("VERSION")
+	if version == "" {
+		version = "v1"
+	}
 	serverAddress := fmt.Sprintf("%s:%s", serverHost, serverPort)
 
 	conn, err := grpc.Dial(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -39,8 +43,15 @@ func main() {
 			return
 		}
 
-		w.Header().Set("X-Version", "v1")
-		w.Write([]byte(res.GetQuote()))
+		w.Header().Set("X-Version", version)
+		
+		if version == "v2" {
+			response := fmt.Sprintf(`{"quote": "%s", "version": "%s", "enhanced": true}`, res.GetQuote(), version)
+			w.Header().Set("Content-Type", "application/json")
+			w.Write([]byte(response))
+		} else {
+			w.Write([]byte(res.GetQuote()))
+		}
 	})
 
 	log.Println("REST client listening at :8080")

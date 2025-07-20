@@ -3,8 +3,13 @@ variable "namespace" {
   type        = string
 }
 
-variable "client_image" {
-  description = "Docker image for the client"
+variable "client_v1_image" {
+  description = "Docker image for the client v1"
+  type        = string
+}
+
+variable "client_v2_image" {
+  description = "Docker image for the client v2"
   type        = string
 }
 

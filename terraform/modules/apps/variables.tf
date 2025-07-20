@@ -13,8 +13,13 @@ variable "server_port" {
   type        = number
 }
 
-variable "client_image" {
+variable "client_v1_image" {
   description = "Docker image for the client"
+  type        = string
+}
+
+variable "client_v2_image" {
+  description = "Docker image for the client v2"
   type        = string
 }
 

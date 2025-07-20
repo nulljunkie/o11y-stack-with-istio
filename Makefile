@@ -6,7 +6,7 @@ help: ## Show this help message
 
 build-images: ## Build Docker images
 	@echo "Building Docker images..."
-	./build.sh
+	./build
 
 tf-init: ## Initialize Terraform
 	@echo "Initializing Terraform..."

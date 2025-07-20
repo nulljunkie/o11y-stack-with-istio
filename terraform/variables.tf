@@ -34,8 +34,13 @@ variable "server_image" {
   type        = string
 }
 
-variable "client_image" {
+variable "client_v1_image" {
   description = "Container image for the quote client application"
+  type        = string
+}
+
+variable "client_v2_image" {
+  description = "Container image for the quote client v2 application"
   type        = string
 }
 

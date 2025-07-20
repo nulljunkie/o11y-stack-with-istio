@@ -14,11 +14,11 @@ module "istio" {
   app_namespace = var.namespace
 }
 
-module "monitoring" {
-  source = "./monitoring"
-
-  grafana_admin_password = var.grafana_admin_password
-  grafana_nodeport      = var.grafana_nodeport
-
-  depends_on = [module.istio]
-}
+# module "monitoring" {
+#   source = "./monitoring"
+#
+#   grafana_admin_password = var.grafana_admin_password
+#   grafana_nodeport      = var.grafana_nodeport
+#
+#   depends_on = [module.istio]
+# }
